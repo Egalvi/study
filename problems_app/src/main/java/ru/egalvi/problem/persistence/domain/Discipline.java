@@ -10,6 +10,7 @@ import java.util.List;
 public final class Discipline {
     @Id
     @Column(name = "iddiscipline")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     @Column(name = "name")

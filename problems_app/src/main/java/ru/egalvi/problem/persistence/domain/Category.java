@@ -1,8 +1,6 @@
 package ru.egalvi.problem.persistence.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *
@@ -11,6 +9,7 @@ import javax.persistence.Id;
 public final class Category {
     @Id
     @Column(name = "idcategory")
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
     @Column(name = "name")
@@ -26,4 +25,21 @@ public final class Category {
 //    @ElementCollection(fetch = FetchType.EAGER, targetClass = ru.egalvi.problem.persistence.domain.Category.class)
 //    @JoinTable(name = "problem", joinColumns = @JoinColumn(name = "idcategory"))
 //    private List<Problem> problems;
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

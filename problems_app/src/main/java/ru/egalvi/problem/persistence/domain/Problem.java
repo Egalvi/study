@@ -1,8 +1,6 @@
 package ru.egalvi.problem.persistence.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *
@@ -11,6 +9,7 @@ import javax.persistence.Id;
 public final class Problem {
     @Id
     @Column(name = "idproblem")
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
     @Column(name = "text")
