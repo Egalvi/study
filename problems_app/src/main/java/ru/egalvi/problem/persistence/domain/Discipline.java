@@ -20,6 +20,15 @@ public final class Discipline {
     @JoinTable(name = "category", joinColumns = @JoinColumn(name = "iddiscipline"))
     private List<Category> categories;
 
+    protected Discipline() {
+    }
+
+    public Discipline(long id, String name, List<Category> categories) {
+        this.id = id;
+        this.name = name;
+        this.categories = categories;
+    }
+
     public long getId() {
         return id;
     }

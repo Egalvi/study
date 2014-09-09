@@ -27,6 +27,14 @@ public final class Category {
 //    private List<Problem> problems;
 
 
+    protected Category() {
+    }
+
+    public Category(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }

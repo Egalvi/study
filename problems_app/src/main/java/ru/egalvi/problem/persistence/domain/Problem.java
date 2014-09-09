@@ -15,7 +15,15 @@ public final class Problem {
     @Column(name = "text")
     private String text;
 
-//    @Column(name = "idcategory")
+    protected Problem() {
+    }
+
+    public Problem(long id, String text) {
+        this.id = id;
+        this.text = text;
+    }
+
+    //    @Column(name = "idcategory")
 //    private Category category;
 
 //    @Column(name = "solution")
