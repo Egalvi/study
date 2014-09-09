@@ -16,15 +16,13 @@ public final class Discipline {
     @Column(name = "name")
     private String name;
 
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = ru.egalvi.problem.persistence.domain.Category.class)
-    @JoinTable(name = "category", joinColumns = @JoinColumn(name = "iddiscipline"))
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "discipline")
     private List<Category> categories;
 
     protected Discipline() {
     }
 
-    public Discipline(long id, String name, List<Category> categories) {
-        this.id = id;
+    public Discipline(String name, List<Category> categories) {
         this.name = name;
         this.categories = categories;
     }

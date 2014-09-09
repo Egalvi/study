@@ -27,19 +27,18 @@ public class DisciplineRepositoryIntegrationTests {
     DisciplineRepository disciplineRepository;
 
     @Test
-    public void thatItemIsInsertedIntoRepoWorks() throws Exception {
-        long key = 1l;
+    public void findByName() throws Exception {
+        String name = "discipline1";
 
-//        Category category = new Category(1l,"cat1");
-        Discipline discipline = new Discipline(key,"discipline1",null/*Arrays.asList(category)*/);
+        Discipline discipline = new Discipline(name, null/*Arrays.asList(category)*/);
+
+        long key = discipline.getId();
 
         disciplineRepository.save(discipline);
 
-        Discipline retrievedDiscipline = disciplineRepository.findById(key);
+        Discipline retrievedDiscipline = disciplineRepository.findByName(name).get(0);
 
         assertNotNull(retrievedDiscipline);
-        assertEquals(key, retrievedDiscipline.getId());
-        assertEquals("discipline1", retrievedDiscipline.getName());
+        assertEquals(name, retrievedDiscipline.getName());
     }
-
 }

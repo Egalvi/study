@@ -15,8 +15,12 @@ public final class Category {
     @Column(name = "name")
     private String name;
 
-//    @Column(name = "iddiscipline")
-//    private Discipline discipline;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Discipline.class)
+    @JoinColumn(name = "iddiscipline")
+    private Discipline discipline;
+
+//    @Column (name = "iddiscipline")
+//    long iddiscipline;
 
 //    @ElementCollection(fetch = FetchType.EAGER, targetClass = ru.egalvi.problem.persistence.domain.Category.class)
 //    @JoinTable(name = "category", joinColumns = @JoinColumn(name = "idparentcategory"))
