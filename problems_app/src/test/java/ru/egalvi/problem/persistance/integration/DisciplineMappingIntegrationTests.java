@@ -21,7 +21,7 @@ import static ru.egalvi.problem.persistance.domain.fixture.JPAAssertions.assertT
 @ContextConfiguration(classes = {JPAConfiguration.class})
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
-public class OrderMappingIntegrationTests {
+public class DisciplineMappingIntegrationTests {
     @Autowired
     EntityManager manager;
 
