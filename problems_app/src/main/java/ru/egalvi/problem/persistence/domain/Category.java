@@ -24,7 +24,7 @@ public final class Category {
 //    @JoinTable(name = "category", joinColumns = @JoinColumn(name = "idparentcategory"))
 //    private List<Category> categories;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "problem")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Problem> problems;
 
 

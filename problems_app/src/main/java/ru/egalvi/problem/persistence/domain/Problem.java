@@ -16,6 +16,13 @@ public final class Problem {
     @Column(name = "text")
     private String text;
 
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Discipline.class)
+    @JoinColumn(name = "idcategory")
+    private Category category;
+
+    @Column(name = "solution")
+    private File solution;
+
     protected Problem() {
     }
 
@@ -23,11 +30,4 @@ public final class Problem {
         this.id = id;
         this.text = text;
     }
-
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Discipline.class)
-    @JoinColumn(name = "idcategory")
-    private Category category;
-
-    @Column(name = "solution")
-    private File solution;
 }
