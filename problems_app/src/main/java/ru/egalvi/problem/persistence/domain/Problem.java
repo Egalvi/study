@@ -1,6 +1,7 @@
 package ru.egalvi.problem.persistence.domain;
 
 import javax.persistence.*;
+import java.io.File;
 
 /**
  *
@@ -23,9 +24,10 @@ public final class Problem {
         this.text = text;
     }
 
-    //    @Column(name = "idcategory")
-//    private Category category;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Discipline.class)
+    @JoinColumn(name = "idcategory")
+    private Category category;
 
-//    @Column(name = "solution")
-//    private File solution;
+    @Column(name = "solution")
+    private File solution;
 }

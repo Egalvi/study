@@ -1,6 +1,7 @@
 package ru.egalvi.problem.persistence.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  *
@@ -19,16 +20,12 @@ public final class Category {
     @JoinColumn(name = "iddiscipline")
     private Discipline discipline;
 
-//    @Column (name = "iddiscipline")
-//    long iddiscipline;
-
 //    @ElementCollection(fetch = FetchType.EAGER, targetClass = ru.egalvi.problem.persistence.domain.Category.class)
 //    @JoinTable(name = "category", joinColumns = @JoinColumn(name = "idparentcategory"))
 //    private List<Category> categories;
 
-//    @ElementCollection(fetch = FetchType.EAGER, targetClass = ru.egalvi.problem.persistence.domain.Category.class)
-//    @JoinTable(name = "problem", joinColumns = @JoinColumn(name = "idcategory"))
-//    private List<Problem> problems;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "problem")
+    private List<Problem> problems;
 
 
     protected Category() {
