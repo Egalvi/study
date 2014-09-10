@@ -1,6 +1,7 @@
 package ru.egalvi.problem.persistence.domain;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,12 +18,12 @@ public final class Discipline {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discipline")
-    private List<Category> categories;
+    private Collection<Category> categories;
 
     protected Discipline() {
     }
 
-    public Discipline(String name, List<Category> categories) {
+    public Discipline(String name, Collection<Category> categories) {
         this.name = name;
         this.categories = categories;
     }
@@ -43,7 +44,7 @@ public final class Discipline {
         this.name = name;
     }
 
-    public List<Category> getCategories() {
+    public Collection<Category> getCategories() {
         return categories;
     }
 

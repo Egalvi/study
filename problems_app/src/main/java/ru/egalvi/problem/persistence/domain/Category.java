@@ -2,7 +2,6 @@ package ru.egalvi.problem.persistence.domain;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class Category {
     private Collection<Category> children;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<Problem> problems;
+    private Collection<Problem> problems;
 
 
     protected Category() {
