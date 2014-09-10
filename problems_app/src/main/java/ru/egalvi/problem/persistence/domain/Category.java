@@ -1,6 +1,7 @@
 package ru.egalvi.problem.persistence.domain;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -20,9 +21,14 @@ public final class Category {
     @JoinColumn(name = "iddiscipline")
     private Discipline discipline;
 
-//    @ElementCollection(fetch = FetchType.EAGER, targetClass = ru.egalvi.problem.persistence.domain.Category.class)
-//    @JoinTable(name = "category", joinColumns = @JoinColumn(name = "idparentcategory"))
-//    private List<Category> categories;
+    //This is an example of self one-to-many bidirectional relation.
+    //Parent-children relation is implemented here.
+    @ManyToOne
+    @JoinColumn(name = "idparentcategory")
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent")
+    private Collection<Category> children;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Problem> problems;
