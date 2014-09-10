@@ -1,5 +1,8 @@
 package ru.egalvi.problem.persistence.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -10,7 +13,7 @@ import java.util.Collection;
 public final class Category {
     @Id
     @Column(name = "idcategory")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "name")
@@ -55,5 +58,47 @@ public final class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Discipline getDiscipline() {
+        return discipline;
+    }
+
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
+    }
+
+    public Category getParent() {
+        return parent;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
+    }
+
+    public Collection<Category> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Collection<Category> children) {
+        this.children = children;
+    }
+
+    public Collection<Problem> getProblems() {
+        return problems;
+    }
+
+    public void setProblems(Collection<Problem> problems) {
+        this.problems = problems;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return EqualsBuilder.reflectionEquals(this, o);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 }

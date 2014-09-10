@@ -1,7 +1,10 @@
 package ru.egalvi.problem.persistence.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
-import java.io.File;
+import java.util.Collection;
 
 /**
  *
@@ -20,8 +23,8 @@ public final class Problem {
     @JoinColumn(name = "idcategory")
     private Category category;
 
-    @Column(name = "solution")
-    private File solution;
+    @OneToMany(mappedBy = "problem")
+    private Collection<Solution> solution;
 
     protected Problem() {
     }
@@ -29,5 +32,47 @@ public final class Problem {
     public Problem(long id, String text) {
         this.id = id;
         this.text = text;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Collection<Solution> getSolution() {
+        return solution;
+    }
+
+    public void setSolution(Collection<Solution> solution) {
+        this.solution = solution;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return EqualsBuilder.reflectionEquals(this, o);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 }
