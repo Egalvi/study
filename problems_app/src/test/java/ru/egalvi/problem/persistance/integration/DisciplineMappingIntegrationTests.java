@@ -28,8 +28,8 @@ public class DisciplineMappingIntegrationTests {
     @Test
     public void thatItemCustomMappingWorks() throws Exception {
         assertTableExists(manager, "discipline");
-//        assertTableExists(manager, "category");
-//        assertTableExists(manager, "problem");
+        assertTableExists(manager, "category");
+        assertTableExists(manager, "problem");
 
         assertTableHasColumn(manager, "discipline", "iddiscipline");
         assertTableHasColumn(manager, "discipline", "name");

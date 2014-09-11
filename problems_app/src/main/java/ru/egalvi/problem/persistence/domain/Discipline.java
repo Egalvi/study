@@ -10,7 +10,8 @@ import java.util.List;
 /**
  *
  */
-@Entity(name = "discipline")
+@Entity
+@Table(name = "discipline")
 public final class Discipline {
     @Id
     @Column(name = "iddiscipline")
