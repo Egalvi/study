@@ -5,7 +5,7 @@ import java.io.File;
 /**
  *
  */
-public final class Problem {
+public final class ProblemDto {
     private String text;
     private CategoryDto category;
     private File solution;

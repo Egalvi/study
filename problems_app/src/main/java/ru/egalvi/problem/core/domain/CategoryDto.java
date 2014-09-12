@@ -13,7 +13,7 @@ public final class CategoryDto {
     private String name;
     private DisciplineDto discipline;
     private List<CategoryDto> categories;
-    private List<Problem> problems;
+    private List<ProblemDto> problems;
 
     public Long getId() {
         return id;
@@ -47,11 +47,11 @@ public final class CategoryDto {
         this.categories = categories;
     }
 
-    public List<Problem> getProblems() {
+    public List<ProblemDto> getProblems() {
         return problems;
     }
 
-    public void setProblems(List<Problem> problems) {
+    public void setProblems(List<ProblemDto> problems) {
         this.problems = problems;
     }
 
