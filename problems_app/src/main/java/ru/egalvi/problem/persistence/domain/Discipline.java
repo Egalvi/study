@@ -1,11 +1,14 @@
 package ru.egalvi.problem.persistence.domain;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import ru.egalvi.problem.core.domain.CategoryDto;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  *
@@ -15,7 +18,7 @@ import java.util.List;
 public final class Discipline {
     @Id
     @Column(name = "iddiscipline")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(name = "name")
@@ -27,24 +30,15 @@ public final class Discipline {
     protected Discipline() {
     }
 
-    public Discipline(String name, Collection<Category> categories) {
-        this.name = name;
-        this.categories = categories;
-    }
-
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
@@ -52,7 +46,7 @@ public final class Discipline {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    private void setCategories(Collection<Category> categories) {
         this.categories = categories;
     }
 
@@ -64,5 +58,51 @@ public final class Discipline {
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    /**
+     * A Builder for the Discipline class.
+     */
+    public static class Builder {
+        private Long id;
+        private String name;
+        private Collection<Category> categories;
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setCategories(Collection<Category> categories) {
+            this.categories = categories;
+            return this;
+        }
+
+        public Builder setCategoriesFromModel(Collection<CategoryDto> categories){
+            this.categories= Collections2.transform(categories,new Function<CategoryDto, Category>() {
+                @Override
+                public Category apply(CategoryDto input) {
+                    return new Category(input.getId(),input.getName());
+                }
+            });
+            return this;
+        }
+
+        public Discipline build() {
+            if (name == null) {
+                throw new IllegalStateException("Discipline name must be specified");
+            }
+            Discipline discipline = new Discipline();
+            discipline.setName(name);
+            discipline.setCategories(new ArrayList<Category>(categories));
+            return discipline;
+        }
+
+        public Builder update(Discipline toUpdate){
+            id=toUpdate.getId();
+            name=toUpdate.getName();
+            categories=toUpdate.getCategories();
+            return this;
+        }
     }
 }

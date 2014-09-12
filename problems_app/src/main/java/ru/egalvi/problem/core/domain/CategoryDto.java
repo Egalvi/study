@@ -8,11 +8,20 @@ import java.util.List;
 /**
  *
  */
-public final class Category {
+public final class CategoryDto {
+    private Long id;
     private String name;
-    private Discipline discipline;
-    private List<Category> categories;
+    private DisciplineDto discipline;
+    private List<CategoryDto> categories;
     private List<Problem> problems;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -22,19 +31,19 @@ public final class Category {
         this.name = name;
     }
 
-    public Discipline getDiscipline() {
+    public DisciplineDto getDiscipline() {
         return discipline;
     }
 
-    public void setDiscipline(Discipline discipline) {
+    public void setDiscipline(DisciplineDto discipline) {
         this.discipline = discipline;
     }
 
-    public List<Category> getCategories() {
+    public List<CategoryDto> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<CategoryDto> categories) {
         this.categories = categories;
     }
 
