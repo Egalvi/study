@@ -27,7 +27,7 @@ import java.util.Properties;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"ru.egalvi.problem.persistence.repository"})
+@ComponentScan(basePackages = {"ru.egalvi.problem.persistence.repository","ru.egalvi.problem.persistence.service"})
 @EnableJpaRepositories(basePackages = "ru.egalvi.problem.persistence.repository",
         includeFilters = @ComponentScan.Filter(value = {DisciplineRepository.class}, type = FilterType.ASSIGNABLE_TYPE))
 //@EnableWebMvc
