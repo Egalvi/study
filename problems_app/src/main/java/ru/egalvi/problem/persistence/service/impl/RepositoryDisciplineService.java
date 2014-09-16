@@ -31,9 +31,7 @@ public class RepositoryDisciplineService implements DisciplineService {
     @Override
     public DisciplineDto create(DisciplineDto created) {
         LOGGER.debug("Creating discipline: " + created);
-        Discipline saved =
-                disciplineRepository.save(new Discipline.Builder().setName(created.getName()).setCategoriesFromModel(
-                        created.getCategories()).build());
+        Discipline saved = disciplineRepository.save(orikaMappings.getMapper().map(created, Discipline.class));
         return orikaMappings.getMapper().map(saved, DisciplineDto.class);
     }
 

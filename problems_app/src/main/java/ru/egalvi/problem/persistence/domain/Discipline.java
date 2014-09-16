@@ -30,6 +30,12 @@ public final class Discipline {
     protected Discipline() {
     }
 
+    public Discipline(String name, Collection<Category> categories) {
+//        this.id = id;
+        this.name = name;
+        this.categories = categories;
+    }
+
     public long getId() {
         return id;
     }
