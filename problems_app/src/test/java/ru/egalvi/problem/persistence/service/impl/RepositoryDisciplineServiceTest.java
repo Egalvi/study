@@ -14,6 +14,8 @@ import ru.egalvi.problem.config.JPAConfiguration;
 import ru.egalvi.problem.core.domain.CategoryDto;
 import ru.egalvi.problem.core.domain.DisciplineDto;
 import ru.egalvi.problem.persistence.domain.Discipline;
+import ru.egalvi.problem.persistence.service.DisciplineService;
+import ru.egalvi.problem.persistence.service.EntityNotFoundException;
 
 import javax.annotation.Resource;
 import java.util.Collections;
@@ -29,7 +31,7 @@ public class RepositoryDisciplineServiceTest {
     public static final String UPDATED_NAME = "discipline_updated";
 
     @Resource
-    private RepositoryDisciplineService repositoryDisciplineService;
+    private DisciplineService repositoryDisciplineService;
 
     @Before
     public void setUp() throws Exception {
@@ -59,22 +61,71 @@ public class RepositoryDisciplineServiceTest {
 
     @Test
     public void testDelete() throws Exception {
+        //given
+        DisciplineDto disciplineDto = getDto();
 
+        //when
+        Discipline discipline = repositoryDisciplineService.create(disciplineDto);
+        Discipline deleted = repositoryDisciplineService.delete(discipline.getId());
+
+        //then
+        Assert.assertEquals("Created and deleted disciplines should be equal", discipline, deleted);
+    }
+
+    @Test(expected = EntityNotFoundException.class)
+    public void testDeleteException() throws Exception {
+        //given
+        DisciplineDto disciplineDto = getDto();
+
+        //when
+        Discipline discipline = repositoryDisciplineService.create(disciplineDto);
+        Discipline deleted = repositoryDisciplineService.delete(-1L);
+
+        //then
+        Assert.assertEquals("Created and deleted disciplines should be equal", discipline, deleted);
     }
 
     @Test
     public void testFindAll() throws Exception {
+        //given
+        DisciplineDto disciplineDto = getDto();
 
+        //when
+        Discipline discipline1 = repositoryDisciplineService.create(disciplineDto);
+        disciplineDto.setName(UPDATED_NAME);
+        Discipline discipline2 = repositoryDisciplineService.create(disciplineDto);
+        Iterable<Discipline> all = repositoryDisciplineService.findAll();
+
+        //then
+        Assert.assertTrue("Should contain discipline1",Iterables.contains(all,discipline1));
+        Assert.assertTrue("Should contain discipline2", Iterables.contains(all, discipline2));
     }
 
     @Test
     public void testFindById() throws Exception {
+        //given
+        DisciplineDto disciplineDto = getDto();
 
+        //when
+        Discipline discipline = repositoryDisciplineService.create(disciplineDto);
+        Discipline found = repositoryDisciplineService.findById(discipline.getId());
+
+        //then
+        Assert.assertEquals("Created and deleted disciplines should be equal", discipline, found);
     }
 
     @Test
     public void testUpdate() throws Exception {
-
+//        //given
+//        DisciplineDto disciplineDto = getDto();
+//
+//        //when
+//        Discipline discipline = repositoryDisciplineService.create(disciplineDto);
+//        Discipline updated = new Discipline.Builder().update(discipline).setName(UPDATED_NAME).build();
+//        Discipline found = repositoryDisciplineService.update(updated);
+//
+//        //then
+//        Assert.assertEquals("Created and deleted disciplines should be equal", discipline, found);
     }
 
     private DisciplineDto getDto() {
