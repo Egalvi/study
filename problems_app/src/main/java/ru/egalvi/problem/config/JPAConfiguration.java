@@ -27,7 +27,8 @@ import java.util.Properties;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"ru.egalvi.problem.persistence.repository","ru.egalvi.problem.persistence.service"})
+@ComponentScan(basePackages = {"ru.egalvi.problem.persistence.repository", "ru.egalvi.problem.persistence.service",
+        "ru.egalvi.problem.config"})
 @EnableJpaRepositories(basePackages = "ru.egalvi.problem.persistence.repository",
         includeFilters = @ComponentScan.Filter(value = {DisciplineRepository.class}, type = FilterType.ASSIGNABLE_TYPE))
 //@EnableWebMvc
@@ -58,7 +59,7 @@ public class JPAConfiguration {
     private Environment environment;
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         BoneCPDataSource dataSource = new BoneCPDataSource();
 
         dataSource.setDriverClass(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
@@ -83,7 +84,8 @@ public class JPAConfiguration {
                 environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_FORMAT_SQL,
                 environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
-        jpaProterties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO, environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
+        jpaProterties.put(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO,
+                environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_HBM2DDL_AUTO));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY,
                 environment.getRequiredProperty(PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY));
         jpaProterties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL,

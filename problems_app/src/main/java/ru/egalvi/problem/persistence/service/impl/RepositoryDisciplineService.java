@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.egalvi.problem.config.OrikaMappings;
 import ru.egalvi.problem.core.domain.DisciplineDto;
 import ru.egalvi.problem.persistence.domain.Discipline;
 import ru.egalvi.problem.persistence.repository.DisciplineRepository;
@@ -23,17 +24,22 @@ public class RepositoryDisciplineService implements DisciplineService {
     @Resource
     private DisciplineRepository disciplineRepository;
 
+    @Resource
+    private OrikaMappings orikaMappings;
+
     @Transactional
     @Override
-    public Discipline create(DisciplineDto created) {
+    public DisciplineDto create(DisciplineDto created) {
         LOGGER.debug("Creating discipline: " + created);
-        return disciplineRepository.save(new Discipline.Builder().setName(created.getName()).setCategoriesFromModel(
-                created.getCategories()).build());
+        Discipline saved =
+                disciplineRepository.save(new Discipline.Builder().setName(created.getName()).setCategoriesFromModel(
+                        created.getCategories()).build());
+        return orikaMappings.getMapper().map(saved, DisciplineDto.class);
     }
 
     @Transactional(rollbackFor = EntityNotFoundException.class)
     @Override
-    public Discipline delete(Long id) throws EntityNotFoundException {
+    public DisciplineDto delete(Long id) throws EntityNotFoundException {
         LOGGER.debug("Deleting discipline with id: " + id);
         Discipline deleted = disciplineRepository.findOne(id);
         if (deleted == null) {
@@ -41,26 +47,26 @@ public class RepositoryDisciplineService implements DisciplineService {
             throw new EntityNotFoundException("No discipline with id: " + id);
         }
         disciplineRepository.delete(deleted);
-        return deleted;
+        return orikaMappings.getMapper().map(deleted, DisciplineDto.class);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Iterable<Discipline> findAll() {
+    public Iterable<DisciplineDto> findAll() {
         LOGGER.debug("Selecting all disciplines");
-        return disciplineRepository.findAll();
+        return orikaMappings.getMapper().mapAsList(disciplineRepository.findAll(), DisciplineDto.class);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Discipline findById(Long id) {
+    public DisciplineDto findById(Long id) {
         LOGGER.debug("Finding discipline by id: " + id);
-        return disciplineRepository.findOne(id);
+        return orikaMappings.getMapper().map(disciplineRepository.findOne(id), DisciplineDto.class);
     }
 
     @Transactional(rollbackFor = EntityNotFoundException.class)
     @Override
-    public Discipline update(DisciplineDto updated) throws EntityNotFoundException {
+    public DisciplineDto update(DisciplineDto updated) throws EntityNotFoundException {
         LOGGER.debug("Updating discipline with information: " + updated);
 
         Discipline discipline = disciplineRepository.findOne(updated.getId());
@@ -75,7 +81,7 @@ public class RepositoryDisciplineService implements DisciplineService {
 
         disciplineRepository.save(discipline);
 
-        return discipline;
+        return orikaMappings.getMapper().map(discipline, DisciplineDto.class);
     }
 
     @VisibleForTesting
