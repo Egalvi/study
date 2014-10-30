@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  *
  */
 public class RepositoryCategoryService implements CategoryService {
-    private Logger LOGGER = LoggerFactory.getLogger(RepositoryCategoryService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryCategoryService.class);
 
     @Resource
     private CategoryRepository categoryRepository;
