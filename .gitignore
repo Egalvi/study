@@ -16,3 +16,4 @@ problems_app/.gradle/2.0/taskArtifacts/cache.properties
 problems_app/.gradle/
 problems_app/gradle/wrapper/gradle-wrapper.properties
 problems_app/build/
+.sonar/
