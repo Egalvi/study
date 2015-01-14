@@ -10,5 +10,5 @@ public interface DisciplineService {
     DisciplineDto delete(Long id) throws EntityNotFoundException;
     Iterable<DisciplineDto> findAll();
     DisciplineDto findById(Long id);
-//    DisciplineDto update(DisciplineDto updated) throws EntityNotFoundException;
+    DisciplineDto update(DisciplineDto updated) throws EntityNotFoundException;
 }

@@ -62,9 +62,12 @@ public class RepositoryDisciplineService implements DisciplineService {
         return orikaMappings.getMapper().map(disciplineRepository.findOne(id), DisciplineDto.class);
     }
 
-//    @Transactional(rollbackFor = EntityNotFoundException.class)
-//    @Override
-//    public DisciplineDto update(DisciplineDto updated) throws EntityNotFoundException {
+    @Transactional(rollbackFor = EntityNotFoundException.class)
+    @Override
+    public DisciplineDto update(DisciplineDto updated) throws EntityNotFoundException {
+        //TODO implement
+        return null;
+
 //        LOGGER.debug("Updating discipline with information: " + updated);
 //
 //        Discipline discipline = disciplineRepository.findOne(updated.getId());
@@ -80,7 +83,7 @@ public class RepositoryDisciplineService implements DisciplineService {
 //        disciplineRepository.save(discipline);
 //
 //        return orikaMappings.getMapper().map(discipline, DisciplineDto.class);
-//    }
+    }
 
     @VisibleForTesting
     protected void setDisciplineRepository(DisciplineRepository disciplineRepository) {
