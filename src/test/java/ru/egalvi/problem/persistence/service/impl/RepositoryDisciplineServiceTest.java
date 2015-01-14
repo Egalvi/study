@@ -7,8 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import ru.egalvi.problem.Application;
 import ru.egalvi.problem.core.domain.CategoryDto;
 import ru.egalvi.problem.core.domain.DisciplineDto;
 import ru.egalvi.problem.persistence.service.DisciplineService;
@@ -18,7 +19,8 @@ import javax.annotation.Resource;
 import java.util.Collections;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MockServletContext.class)
+@SpringApplicationConfiguration(classes = Application.class)
+@WebAppConfiguration
 public class RepositoryDisciplineServiceTest {
 
     public static final Long ID = 7L;
