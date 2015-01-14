@@ -13,3 +13,12 @@ hs_err_pid*
 
 # Idea files
 .idea
+*.iml
+#Gradle files
+.gradle
+#compiled
+build
+#Temporary
+tmp
+#Test-results
+test-result
