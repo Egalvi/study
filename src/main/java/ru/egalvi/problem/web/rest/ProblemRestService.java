@@ -5,6 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ru.egalvi.problem.persistence.service.ProblemService;
+
+import javax.annotation.Resource;
 
 /**
  *
@@ -13,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/problem")
 public class ProblemRestService {
 
+    @Resource
+    private ProblemService problemService;
+
     @RequestMapping("")
     public String listAllProblems(Model model) {
-        model.addAttribute("foo", "Not implemented yet");
+        model.addAttribute("problems", problemService.findAll());
         return "problem";
     }
 

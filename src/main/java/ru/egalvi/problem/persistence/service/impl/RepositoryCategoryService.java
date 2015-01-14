@@ -2,6 +2,7 @@ package ru.egalvi.problem.persistence.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import ru.egalvi.problem.config.OrikaMappings;
 import ru.egalvi.problem.core.domain.CategoryDto;
 import ru.egalvi.problem.core.domain.DisciplineDto;
@@ -15,6 +16,7 @@ import javax.annotation.Resource;
 /**
  *
  */
+@Service
 public class RepositoryCategoryService implements CategoryService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryCategoryService.class);
 
