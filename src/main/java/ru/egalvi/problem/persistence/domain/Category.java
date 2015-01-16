@@ -29,12 +29,11 @@ public final class Category {
     @JoinColumn(name = "idparentcategory")
     private Category parent;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
     private Collection<Category> children;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private Collection<Problem> problems;
-
 
     protected Category() {
     }

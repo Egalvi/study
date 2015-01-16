@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.egalvi.problem.core.domain.CategoryDto;
 import ru.egalvi.problem.core.domain.DisciplineDto;
+import ru.egalvi.problem.persistence.service.CategoryService;
 import ru.egalvi.problem.persistence.service.DisciplineService;
 import ru.egalvi.problem.persistence.service.EntityNotFoundException;
 
@@ -17,37 +18,33 @@ import javax.annotation.Resource;
  *
  */
 @Controller
-@RequestMapping("/discipline")
-public class DisciplineRestService {
+@RequestMapping("/discipline/{disciplineId}")
+public class CategoryRestService {
     @Resource
     private DisciplineService disciplineService;
-
-    @RequestMapping("")
-    public String listAll(Model model) {
-        model.addAttribute("disciplines", disciplineService.findAll());
-        model.addAttribute("disciplineDto", new DisciplineDto());
-        return "discipline";
-    }
+    @Resource
+    private CategoryService categoryService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable(value = "id") Long id, Model model) throws EntityNotFoundException {
-        DisciplineDto disciplineDto = disciplineService.findById(id);
-        model.addAttribute("discipline", disciplineDto);
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setDiscipline(disciplineDto);
-        model.addAttribute("categoryDto", categoryDto);
+        model.addAttribute("category", categoryService.findById(id));
         return "category";
     }
 
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
     public String delete(@PathVariable(value = "id") Long id, Model model) throws EntityNotFoundException {
-        disciplineService.delete(id);
-        return "redirect:/discipline";
+        categoryService.delete(id);
+        return "category";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String create(@ModelAttribute("disciplineDto") DisciplineDto disciplineDto, Model model) {
+    public String create(@PathVariable(value = "disciplineId") Long disciplineId,
+        @ModelAttribute("categoryDto") CategoryDto categoryDto, Model model) throws EntityNotFoundException {
+        DisciplineDto disciplineDto = disciplineService.findById(disciplineId);
+        disciplineDto.getCategories().add(categoryDto);
+        //categoryDto.setDiscipline(disciplineDto);
         disciplineService.create(disciplineDto);
-        return "redirect:/discipline";
+        //categoryService.create(categoryDto);
+        return "redirect:/discipline/{disciplineId}";
     }
 }
