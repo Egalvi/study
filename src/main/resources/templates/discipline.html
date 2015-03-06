@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Discipline management page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <table>
+        <tr><th>Name</th><th>Delete</th></tr>
+        <tr th:each="discipline : ${disciplines}">
+            <td><a th:href="@{~/discipline/{id}(id=${discipline.id})}" th:text="${discipline.name}"></a></td>
+            <td><a th:href="@{~/discipline/{id}/delete(id=${discipline.id})}">Delete</a></td>
+        </tr>
+    </table>
+
+    <form action="#" th:object="${disciplineDto}" th:action="@{/discipline/add}">
+        <fieldset>
+            <label>Discipline name</label>
+            <input type="text" th:field="*{name}" />
+            <button type="submit" name="save">Create</button>
+        </fieldset>
+    </form>
+</body>
+</html>
