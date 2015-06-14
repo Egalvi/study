@@ -44,6 +44,13 @@ public class DisciplineServiceTest {
 
     }
 
+    @Test
+    public void canGetProblems() throws Exception {
+        Discipline discipline = getDiscipline();
+
+
+    }
+
     private Discipline getAnotherDiscipline() {
         Discipline discipline = new Discipline();
         discipline.setId(2l);
