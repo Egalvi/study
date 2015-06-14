@@ -1,13 +1,19 @@
 package ru.egalvi.study;
 
+import com.google.common.collect.Collections2;
 import org.junit.Before;
 import org.junit.Test;
 import ru.egalvi.study.dao.MapDisciplineDao;
+import ru.egalvi.study.model.Category;
 import ru.egalvi.study.model.Discipline;
+import ru.egalvi.study.model.Problem;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class DisciplineServiceTest {
@@ -38,17 +44,22 @@ public class DisciplineServiceTest {
     }
 
     @Test
-    public void disciplineHasCategories() throws Exception {
+    public void canSaveCategories() throws Exception {
         Discipline discipline = getDiscipline();
-        discipline.getCategories();
+        List<Category> categories = discipline.getCategories();
+        assertFalse(categories.isEmpty());
+
+        disciplineService.save(discipline);
+
+        assertFalse(Collections2.filter(disciplineService.getAll(), discipl -> !discipl.getCategories().isEmpty()).isEmpty());
 
     }
 
     @Test
     public void canGetProblems() throws Exception {
         Discipline discipline = getDiscipline();
-
-
+        List<Problem> problems = discipline.getCategories().get(0).getProblems();
+        assertFalse(problems.isEmpty());
     }
 
     private Discipline getAnotherDiscipline() {
@@ -60,6 +71,10 @@ public class DisciplineServiceTest {
     private Discipline getDiscipline() {
         Discipline discipline = new Discipline();
         discipline.setId(1l);
+        Category category = new Category();
+        Problem problem = new Problem();
+        category.getProblems().add(problem);
+        discipline.getCategories().add(category);
         return discipline;
     }
 }

@@ -1,10 +1,11 @@
 package ru.egalvi.study.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Discipline {
     long id;
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
 
     public long getId() {
         return id;
