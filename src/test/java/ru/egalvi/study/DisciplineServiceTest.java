@@ -20,18 +20,8 @@ public class DisciplineServiceTest {
     }
 
     @Test
-    public void canCallGetDisciplines() throws Exception {
-        disciplineService.getAll();
-    }
-
-    @Test
-    public void canSave() throws Exception {
-        disciplineService.save(new Discipline());
-    }
-
-    @Test
     public void canSaveAndRetrieve() throws Exception {
-        Discipline discipline = new Discipline();
+        Discipline discipline = getDiscipline();
         disciplineService.save(discipline);
         Collection<Discipline> all = disciplineService.getAll();
         assertTrue(all.contains(discipline));
@@ -39,13 +29,30 @@ public class DisciplineServiceTest {
 
     @Test
     public void canSaveMultiple() throws Exception {
-        Discipline discipline = new Discipline();
-        discipline.setId(1l);
+        Discipline discipline = getDiscipline();
         disciplineService.save(discipline);
-        discipline = new Discipline();
-        discipline.setId(2l);
+        discipline = getAnotherDiscipline();
         disciplineService.save(discipline);
         Collection<Discipline> all = disciplineService.getAll();
         assertEquals(2, all.size());
+    }
+
+    @Test
+    public void disciplineHasCategories() throws Exception {
+        Discipline discipline = getDiscipline();
+        discipline.getCategories();
+
+    }
+
+    private Discipline getAnotherDiscipline() {
+        Discipline discipline = new Discipline();
+        discipline.setId(2l);
+        return discipline;
+    }
+
+    private Discipline getDiscipline() {
+        Discipline discipline = new Discipline();
+        discipline.setId(1l);
+        return discipline;
     }
 }
